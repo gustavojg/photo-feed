@@ -1,12 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
 
-import { IButtonProps, cnButton } from './index';
+import { IButtonProps, cnButton } from "./index";
 
-const Button: FC<IButtonProps> = ({
-  children,
-  onClick,
-  className,
-}) => (
+const Button: FC<IButtonProps> = ({ children, onClick, className }) => (
   <button onClick={onClick} className={cnButton({}, [className])}>
     {children}
   </button>

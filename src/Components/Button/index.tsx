@@ -1,4 +1,4 @@
-import { cn } from '@bem-react/classname';
+import { cn } from "@bem-react/classname";
 
 export interface IButtonProps {
   tag?: string;
@@ -6,4 +6,4 @@ export interface IButtonProps {
   className?: string;
 }
 
-export const cnButton = cn('Button');
+export const cnButton = cn("Button");
