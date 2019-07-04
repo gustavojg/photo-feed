@@ -31,7 +31,8 @@
     "start": "json-server --watch ./src/api/images.json --port 8000 | react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "prettier --write  --check 'src/**/*.tsx'"
   },
   "eslintConfig": {
     "extends": "react-app"
