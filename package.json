@@ -1,5 +1,5 @@
 {
-  "name": "samy-road",
+  "name": "photo-feed",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
@@ -22,7 +22,6 @@
   "devDependencies": {
     "@types/react-redux": "^7.1.1",
     "enzyme": "^3.10.0",
-    "enzyme-adapter-react-15": "^1.4.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "react-redux": "^7.1.0",
     "react-scripts": "3.0.1"
