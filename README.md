@@ -2,6 +2,8 @@
 
 ## This project uses React, TypeScript and Redux
 
+This shows photo feed loading from a webservice and increasing with infinite scroll.
+
 ## Clone project
 
 `git clone https://github.com/gustavojg/photo-feed.git photo-feed`<br>

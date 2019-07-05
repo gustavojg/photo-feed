@@ -7,7 +7,6 @@ export interface IIcon {
   type?: string;
   clipPath: number;
   onClick: any;
-  dataId: number;
 }
 
 const Icon: FC<IIcon> = ({
@@ -17,7 +16,6 @@ const Icon: FC<IIcon> = ({
   type,
   clipPath,
   onClick,
-  dataId
 }) => {
   let color, d;
   const myClipPath = `${clipPath.toString()}-${icon}-${type}`;

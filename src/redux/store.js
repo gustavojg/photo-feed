@@ -1,6 +1,9 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import thunk from 'redux-thunk';
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import thunk from "redux-thunk";
 
-import posts from './reducers/posts';
+import posts from "./reducers/posts";
 
-export const store = createStore(combineReducers({posts}), applyMiddleware(thunk));
+export const store = createStore(
+  combineReducers({ posts }),
+  applyMiddleware(thunk)
+);

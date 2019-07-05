@@ -2,6 +2,7 @@
   "name": "photo-feed",
   "version": "1.0.0",
   "private": true,
+  "author": "Gustavo Jiménez <soygus@gmail.com>",
   "dependencies": {
     "@bem-react/core": "^2.0.1",
     "@types/jest": "^24.0.15",

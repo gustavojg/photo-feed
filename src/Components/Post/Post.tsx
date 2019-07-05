@@ -17,6 +17,7 @@ export interface IPosts {
   key?: any;
   liked: boolean;
   id: number;
+  clipPath?: any;
 }
 
 const rePost = (id: number) => {
@@ -29,6 +30,7 @@ const onLike = (id: number) => {
 
 const Post: FC<IPosts> = ({
   id,
+  clipPath,
   enlace,
   price,
   photo,
@@ -72,8 +74,7 @@ const Post: FC<IPosts> = ({
                 <Icon
                   type={liked ? "liked" : "desktop"}
                   icon="like"
-                  clipPath={id}
-                  dataId={id}
+                  clipPath={clipPath}
                   onClick={onLike.bind(null, id)}
                 />
               </MediaQuery>
@@ -81,8 +82,7 @@ const Post: FC<IPosts> = ({
                 <Icon
                   type={liked ? "liked" : "mobile"}
                   icon="like"
-                  clipPath={id}
-                  dataId={id}
+                  clipPath={clipPath}
                   onClick={onLike.bind(null, id)}
                 />
               </MediaQuery>
@@ -95,8 +95,7 @@ const Post: FC<IPosts> = ({
                 <Icon
                   type="desktop"
                   icon="repost"
-                  clipPath={id}
-                  dataId={id}
+                  clipPath={clipPath}
                   onClick={rePost.bind(null, id)}
                 />
               </MediaQuery>
@@ -104,8 +103,7 @@ const Post: FC<IPosts> = ({
                 <Icon
                   type="mobile"
                   icon="repost"
-                  clipPath={id}
-                  dataId={id}
+                  clipPath={clipPath}
                   onClick={rePost.bind(null, id)}
                 />
               </MediaQuery>
