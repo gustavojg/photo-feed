@@ -3,6 +3,7 @@
 ## This project uses React, TypeScript and Redux
 
 This shows photo feed loading from a webservice and increasing with infinite scroll.
+Also you can filter using the searhbox in the header.
 
 ## Clone project
 

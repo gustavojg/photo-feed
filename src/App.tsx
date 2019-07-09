@@ -32,7 +32,6 @@ const App: FC<IAppProps> = ({
   const targetRef: any = React.createRef();
 
   useEffect(() => {
-    //setLoading(loadingData);
     term.current = searchTerm;
     loading.current = loadingData.toString();
   }, [loadingData, currentPage, searchTerm, loadInfo, term, loading]);
