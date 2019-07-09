@@ -15,7 +15,7 @@ const Icon: FC<IIcon> = ({
   height = 36,
   type,
   clipPath,
-  onClick,
+  onClick
 }) => {
   let color, d;
   const myClipPath = `${clipPath.toString()}-${icon}-${type}`;

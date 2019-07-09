@@ -5,19 +5,22 @@ export const REPOST_POST = "REPOST_POST";
 
 // Actions
 
-export const requestPosts = page => {
+export const requestPosts = (page, term) => {
   return {
     type: REQUEST_POSTS,
     postLoaded: false,
-    page
+    loadingData: true,
+    page,
+    term
   };
 };
 
-export const postsLoaded = (result, page) => {
+export const postsLoaded = (result, page, term) => {
   return {
     type: RENDER_POSTS,
     postLoaded: true,
     posts: result,
+    searchTerm: term,
     page
   };
 };
@@ -38,23 +41,17 @@ export function likePost(id) {
   };
 }
 
-export function loadPosts(page) {
+export function loadPosts(page, term) {
   return function(dispatch) {
-    dispatch(requestPosts(page));
-    fetch("http://localhost:8000/data")
+    dispatch(requestPosts(page, term));
+    let searchQuery = "";
+    if (term && term.length > 0) {
+      searchQuery = `?title_like=${term}`;
+    }
+    fetch(`http://localhost:8000/data${searchQuery}`)
       .then(response => response.json())
       .then(json => {
-        dispatch(postsLoaded(json, page));
-      });
-  };
-}
-export function searchPosts(term) {
-  return function(dispatch) {
-    dispatch(requestPosts(term));
-    fetch("http://localhost:8000/data")
-      .then(response => response.json())
-      .then(json => {
-        dispatch(postsLoaded(json));
+        dispatch(postsLoaded(json, page, term));
       });
   };
 }

@@ -1,4 +1,4 @@
-import React, { FC, useState, useLayoutEffect, useEffect } from "react";
+import React, { FC, useState, useLayoutEffect, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { IClassNameProps } from "@bem-react/core";
 
@@ -14,35 +14,46 @@ export interface IAppProps extends IClassNameProps {
   store?: any;
   loadInfo?: any;
   posts?: [];
-  postLoaded?: boolean;
   currentPage: number;
   loadingData: boolean;
+  searchTerm: string;
 }
 
 const App: FC<IAppProps> = ({
   loadInfo,
   posts = null,
-  postLoaded,
   currentPage,
-  loadingData
+  loadingData,
+  searchTerm
 }) => {
   const [pageLoaded, setPageLoaded] = useState(false);
-  const [loading, setLoading] = useState(false);
+  let term = useRef("");
+  let loading = useRef("");
   const targetRef: any = React.createRef();
-  const observer = new IntersectionObserver(
-    (entries: any) => {
-      entries.forEach((entry: any) => {
-        if (entry.isIntersecting && !loading) {
-          loadInfo(++currentPage);
-        }
-      });
-    },
-    {
-      root: null,
-      rootMargin: "0px 0px 50px 0px",
-      threshold: 0
-    }
-  );
+
+  useEffect(() => {
+    //setLoading(loadingData);
+    term.current = searchTerm;
+    loading.current = loadingData.toString();
+  }, [loadingData, currentPage, searchTerm, loadInfo, term, loading]);
+
+  const loadElements = (entries: any) => {
+    entries.forEach((entry: any) => {
+      if (
+        entry.isIntersecting &&
+        loading.current === "false" &&
+        term.current.length === 0
+      ) {
+        loadInfo(++currentPage, "");
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(loadElements, {
+    root: null,
+    rootMargin: "0px 0px 50px 0px",
+    threshold: 0
+  });
 
   useLayoutEffect(() => {
     if (!pageLoaded) {
@@ -50,10 +61,6 @@ const App: FC<IAppProps> = ({
       setPageLoaded(true);
     }
   }, [targetRef, observer, pageLoaded]);
-
-  useEffect(() => {
-    setLoading(loadingData);
-  }, [loadingData]);
 
   const renderPosts = () => {
     if (posts) {
@@ -89,14 +96,14 @@ const App: FC<IAppProps> = ({
 
 const mapStateToProps = (state: any) => ({
   posts: state.posts.postsList,
-  postLoaded: state.posts.postLoaded,
   currentPage: state.posts.currentPage,
-  loadingData: state.posts.loadingData
+  loadingData: state.posts.loadingData,
+  searchTerm: state.posts.searchTerm
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  loadInfo: (page: number) => {
-    dispatch(loadPosts(page));
+  loadInfo: (page: number, term: string) => {
+    dispatch(loadPosts(page, term));
   }
 });
 

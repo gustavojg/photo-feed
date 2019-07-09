@@ -19,8 +19,9 @@ const posts = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         postLoaded: action.postLoaded,
-        loadingData: true,
-        page: action.page
+        loadingData: action.loadingData,
+        page: action.page,
+        searchTerm: action.term
       };
     case RENDER_POSTS:
       const d = new Date();
@@ -28,12 +29,15 @@ const posts = (state = INITIAL_STATE, action) => {
         el.key = `${el.id}-${action.page}-${d.getMilliseconds()}`;
         return el;
       });
+      const postList =
+        action.page === 0 ? postArr : [...state.postsList, ...postArr];
       return {
         ...state,
         loadingData: false,
         postLoaded: action.postLoaded,
-        postsList: [...state.postsList, ...postArr],
-        currentPage: action.page
+        postsList: postList,
+        currentPage: action.page,
+        searchTerm: action.searchTerm
       };
     case LIKE_POST:
       const posts = state.postsList.map(el => {
